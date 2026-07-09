@@ -175,3 +175,62 @@ When hitting this endpoint:
 * **Postman (Headers Tab)**:
   * It shows the key response headers from Tomcat: `Content-Type` (`text/plain;charset=UTF-8`), `Content-Length` (`13`), `Date` (timestamp), `Keep-Alive` (`timeout=60`), and `Connection` (`keep-alive`).
 
+---
+
+## 6. ex2(2) Hands-on Walkthrough (Country Web Service)
+
+In this exercise, we implement a REST endpoint `/country` that loads the India bean from Spring XML configuration and returns it in JSON format.
+
+### 6.1 Project Component Changes
+1. **Controller Class**: Created [CountryController.java](file:///c:/Users/logan/Desktop/CTS/CTS/Spring%20REST/spring-learn/src/main/java/com/cognizant/springlearn/controller/CountryController.java) under `com.cognizant.springlearn.controller`:
+   ```java
+   @RestController
+   public class CountryController {
+       private static final Logger LOGGER = LoggerFactory.getLogger(CountryController.class);
+
+       @RequestMapping(value = "/country", method = RequestMethod.GET)
+       public Country getCountryIndia() {
+           LOGGER.info("Start: getCountryIndia() execution");
+           ApplicationContext context = new ClassPathXmlApplicationContext("country.xml");
+           Country country = context.getBean("country", Country.class);
+           LOGGER.info("End: getCountryIndia() execution");
+           return country;
+       }
+   }
+   ```
+
+### 6.2 Verification Response & Logs
+* **HTTP Response**:
+  ```text
+  HTTP/1.1 200 
+  Content-Type: application/json
+  Content-Length: 28
+  Date: Thu, 09 Jul 2026 05:03:18 GMT
+
+  {"code":"IN","name":"India"}
+  ```
+* **Execution Log Traces**:
+  ```text
+  2026-07-09T10:33:18.571+05:30  INFO 11432 --- [nio-8083-exec-1] c.c.s.controller.CountryController       : Start: getCountryIndia() execution
+  2026-07-09T10:33:18.595+05:30 DEBUG 11432 --- [nio-8083-exec-1] com.cognizant.springlearn.Country        : Inside Country Constructor.
+  2026-07-09T10:33:18.597+05:30 DEBUG 11432 --- [nio-8083-exec-1] com.cognizant.springlearn.Country        : Inside setCode() method: IN
+  2026-07-09T10:33:18.597+05:30 DEBUG 11432 --- [nio-8083-exec-1] com.cognizant.springlearn.Country        : Inside setName() method: India
+  2026-07-09T10:33:18.597+05:30  INFO 11432 --- [nio-8083-exec-1] c.c.s.controller.CountryController       : End: getCountryIndia() execution
+  2026-07-09T10:33:18.709+05:30 DEBUG 11432 --- [nio-8083-exec-1] com.cognizant.springlearn.Country        : Inside getCode() method.
+  2026-07-09T10:33:18.710+05:30 DEBUG 11432 --- [nio-8083-exec-1] com.cognizant.springlearn.Country        : Inside getName() method.
+  ```
+
+### 6.3 Detailed Concept Walkthrough (SME Walkthrough)
+* **What happens in the controller method?**:
+  * Spring maps incoming GET request `/country` to `getCountryIndia()`.
+  * The method instantiates `ClassPathXmlApplicationContext` for `country.xml`, triggers bean creation and dependency injection in Spring, retrieves the singleton `Country` instance from context, and returns it.
+* **How is the bean converted into a JSON response?**:
+  * Because the controller is annotated with `@RestController` (applying `@ResponseBody`), Spring uses the default **Jackson JSON Processor (`MappingJackson2HttpMessageConverter`)** HTTP Message Converter.
+  * Jackson reflects on the returned `Country` object, calls its public getter methods (`getCode()` and `getName()`) to read values (visible in our logs), and serializes them as a JSON string key-value pair.
+* **HTTP Headers Details**:
+  * **Content-Type**: automatically resolved by Jackson as `application/json` to inform the browser/Postman that the payload is JSON-formatted.
+  * **Content-Length**: `28` bytes.
+  * **Date**: Response timestamp.
+  * **Connection / Keep-Alive**: Indicates connection configuration.
+
+
