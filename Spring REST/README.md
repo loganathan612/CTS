@@ -135,3 +135,43 @@ Running `.\mvnw dependency:tree` produces the following actual output:
 ```
 
 This hierarchy illustrates that `spring-boot-starter-webmvc` transitively brings in all components needed for building web/REST services, including logging (`logback`), HTTP message conversion (Jackson serialization), Tomcat server, and Spring's core web utilities. You do not need to specify individual dependencies or version numbers.
+
+---
+
+## 5. ex2(1) Hands-on Walkthrough (Hello World RESTful Web Service)
+
+In this exercise, we implement a simple REST endpoint `/hello` returning `"Hello World!!"` with entry/exit log statements.
+
+### 5.1 Project Component Changes
+1. **Controller Class**: Created [HelloController.java](file:///c:/Users/logan/Desktop/CTS/CTS/Spring%20REST/spring-learn/src/main/java/com/cognizant/springlearn/controller/HelloController.java) under the package `com.cognizant.springlearn.controller`. It has the `@RestController` annotation and a mapping for `GET /hello`:
+   ```java
+   @RestController
+   public class HelloController {
+       private static final Logger LOGGER = LoggerFactory.getLogger(HelloController.class);
+
+       @GetMapping("/hello")
+       public String sayHello() {
+           LOGGER.info("Start: sayHello() execution");
+           String message = "Hello World!!";
+           LOGGER.info("End: sayHello() execution");
+           return message;
+       }
+   }
+   ```
+2. **Application Properties**: Updated `server.port=8083` in `application.properties`.
+
+### 5.2 Verification Logs
+When we access `http://localhost:8083/hello`, the console outputs:
+```text
+2026-07-09T09:48:47.601+05:30  INFO 17204 --- [spring-learn] [nio-8083-exec-1] c.c.s.controller.HelloController         : Start: sayHello() execution
+2026-07-09T09:48:47.601+05:30  INFO 17204 --- [spring-learn] [nio-8083-exec-1] c.c.s.controller.HelloController         : End: sayHello() execution
+```
+
+### 5.3 HTTP Headers Details (SME Walkthrough)
+When hitting this endpoint:
+* **Chrome Browser Developer Tools (Network Tab)**:
+  * **Request Headers**: Chrome automatically adds headers such as `Accept` (declaring preferences like HTML/text/images), `Accept-Encoding` (`gzip, deflate, br`), and `User-Agent` (client information).
+  * **Response Headers**: Tomcat returns headers such as `Content-Type: text/plain;charset=UTF-8` (specifying a plain text response body encoded in UTF-8), `Content-Length: 13` (size of the message in bytes), and `Date`.
+* **Postman (Headers Tab)**:
+  * It shows the key response headers from Tomcat: `Content-Type` (`text/plain;charset=UTF-8`), `Content-Length` (`13`), `Date` (timestamp), `Keep-Alive` (`timeout=60`), and `Connection` (`keep-alive`).
+
