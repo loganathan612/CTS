@@ -1,0 +1,225 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+  --panel-bg: #1e293b;
+  --panel-border: #334155;
+  --accent-color: #6366f1; /* Indigo */
+  --accent-hover: #4f46e5;
+  --accent-secondary: #06b6d4; /* Cyan */
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --success-color: #10b981;
+}
+
+body {
+  margin: 0;
+  font-family: 'Outfit', sans-serif;
+  background: #0f172a;
+  color: var(--text-primary);
+  min-height: 100vh;
+}
+
+.app-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* Heading */
+.app-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.app-header h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin: 0;
+  background: linear-gradient(to right, #6366f1, #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.03em;
+}
+
+.app-header p {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  margin: 10px 0 0 0;
+}
+
+/* Dashboard Sections */
+.dashboard-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.section-card {
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  animation: slideUp 0.4s ease-in-out;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.section-card h3 {
+  font-size: 1.5rem;
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #f1f5f9;
+  border-left: 4px solid var(--accent-color);
+  padding-left: 12px;
+}
+
+/* Interactive Demos styling */
+.demo-row {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.counter-value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--accent-secondary);
+  background: rgba(6, 182, 212, 0.1);
+  padding: 10px 25px;
+  border-radius: 12px;
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  min-width: 100px;
+  text-align: center;
+}
+
+/* Buttons */
+.action-btn {
+  background: var(--accent-color);
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(99, 102, 241, 0.25);
+  transition: all 0.2s ease;
+}
+
+.action-btn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(99, 102, 241, 0.4);
+}
+
+.action-btn:active {
+  transform: translateY(1px);
+}
+
+.action-btn.secondary {
+  background: #334155;
+  box-shadow: none;
+}
+
+.action-btn.secondary:hover {
+  background: #475569;
+}
+
+.action-btn.convert-btn {
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* Messages / Notifications display */
+.msg-banner {
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  color: #c7d2fe;
+  padding: 15px 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  font-weight: 500;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Currency Convertor component specific styling */
+.convertor-container {
+  width: 100%;
+}
+
+.convertor-form {
+  margin-top: 15px;
+}
+
+.converter-row {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.converter-field {
+  flex: 1;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+}
+
+.converter-field label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.currency-symbol {
+  position: absolute;
+  left: 15px;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.input-box {
+  width: 100%;
+  background: #0f172a;
+  border: 1px solid var(--panel-border);
+  color: #fff;
+  padding: 12px 12px 12px 35px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.input-box:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.15);
+}
+
+.conversion-output {
+  margin-top: 12px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  color: #a7f3d0;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
