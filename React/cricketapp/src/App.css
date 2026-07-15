@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg-gradient: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+  --accent-color: #0ea5e9;
+  --accent-hover: #0284c7;
+  --card-bg: #1f2937;
+  --panel-bg: #111827;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --border-color: #374151;
+  --odd-color: #f59e0b;
+  --even-color: #10b981;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #0f172a;
+  color: var(--text-primary);
+  min-height: 100vh;
+}
+
+.app-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.dashboard-header h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin: 0;
+  background: linear-gradient(to right, #0ea5e9, #38bdf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.dashboard-header p {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  margin: 10px 0 0 0;
+}
+
+/* Toggle Switch / Control Section */
+.controls-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.toggle-info {
+  font-size: 1rem;
+  margin-bottom: 12px;
+  color: var(--text-secondary);
+}
+
+.toggle-info span {
+  font-weight: 600;
+  color: var(--accent-color);
+  background: rgba(14, 165, 233, 0.1);
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+
+.toggle-btn {
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(14, 165, 233, 0.4);
+  transition: all 0.2s ease;
+}
+
+.toggle-btn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(14, 165, 233, 0.6);
+}
+
+.toggle-btn:active {
+  transform: translateY(1px);
+}
+
+/* Component Styling */
+.component-container {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border-color);
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.component-container h2 {
+  font-size: 1.8rem;
+  margin-top: 0;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 10px;
+  color: var(--text-primary);
+}
+
+.sub-section {
+  margin-top: 25px;
+  background: var(--panel-bg);
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid var(--border-color);
+}
+
+.sub-section h3 {
+  margin-top: 0;
+  font-size: 1.2rem;
+  color: var(--accent-color);
+}
+
+.description {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: -10px;
+  margin-bottom: 15px;
+}
+
+/* Tables */
+.player-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  text-align: left;
+}
+
+.player-table th,
+.player-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.player-table th {
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+}
+
+.player-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.player-table.filtered tbody tr:hover {
+  background: rgba(14, 165, 233, 0.05);
+}
+
+.high-score {
+  color: #10b981;
+  font-weight: 700;
+}
+
+/* Grid Layout for Destructuring */
+.grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.grid-col {
+  flex: 1;
+  min-width: 280px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 8px;
+  padding: 15px;
+  border: 1px solid var(--border-color);
+}
+
+/* Lists */
+.player-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.player-item {
+  padding: 10px 15px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.player-item.odd {
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  color: var(--odd-color);
+}
+
+.player-item.even {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  color: var(--even-color);
+}
+
+/* Badge Layout for Merging */
+.badge-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.player-badge {
+  background: rgba(14, 165, 233, 0.1);
+  border: 1px solid rgba(14, 165, 233, 0.3);
+  color: var(--text-primary);
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
