@@ -1,0 +1,28 @@
+git --version
+git config --global user.name "Dinesh M"
+git config --global user.email "1.dinesh.mr@gmail.com"
+git config --global --list
+
+git config --global core.editor notepad
+git config --global core.editor
+git config --global -e
+
+mkdir GitDemo
+cd GitDemo
+git init
+
+ls -la
+
+echo "Welcome to Git" > welcome.txt
+ls
+cat welcome.txt
+
+git status
+git add welcome.txt
+git commit -m "Added welcome.txt file"
+
+git remote add origin https://gitlab.com/1.dinesh.mr/gitdemo.git
+git remote -v
+
+git pull origin master
+git push origin master

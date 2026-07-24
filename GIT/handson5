@@ -1,0 +1,11 @@
+cd ~/GitDemo
+
+git status
+
+git branch
+
+git branch -a
+
+git pull origin master
+
+git push origin master

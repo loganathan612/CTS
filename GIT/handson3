@@ -1,0 +1,30 @@
+cd ~/GitDemo
+
+git branch GitNewBranch
+git branch
+git branch -a
+
+git checkout GitNewBranch
+
+echo "This is GitNewBranch" > branch.txt
+
+git add branch.txt
+git commit -m "Added branch.txt in GitNewBranch"
+
+git status
+
+git checkout master
+
+git diff master GitNewBranch
+
+git merge GitNewBranch
+
+git log --oneline --graph --decorate
+
+git branch -d GitNewBranch
+
+git branch
+
+git status
+
+git push origin master
